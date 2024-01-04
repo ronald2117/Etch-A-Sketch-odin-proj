@@ -10,10 +10,21 @@ function displayCells(width) {
         cell.classList.add('.canvas-cells');
         cell.style.width = (canvasContainer.offsetWidth - 4) / width + 'px';
         cell.style.height = (canvasContainer.offsetHeight - 4) / width + 'px';
+        cell.style.backgroundColor = 'white';
+        cell.style.filter = 'brightness(100%)';
         canvasContainer.appendChild(cell);
 
         cell.addEventListener('mouseover', () => {
-            cell.style.backgroundColor = 'red';
+            let randRedVal = Math.floor(Math.random() * 256);
+            let randGreenVal = Math.floor(Math.random() * 256);
+            let randBlueVal = Math.floor(Math.random() * 256);
+            let randColor = `rgb(${randRedVal}, ${randGreenVal}, ${randBlueVal})`
+            if(cell.style.backgroundColor == 'white'){
+                cell.style.backgroundColor = randColor;
+            } else {
+                sqBrightness = cell.style.filter.match(/\d+/);
+                cell.style.filter = `brightness(${sqBrightness - 10}%)`
+            }
         });
     }
 }
